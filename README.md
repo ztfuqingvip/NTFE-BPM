@@ -7,6 +7,8 @@ NTFE-BPM is Business Process Manangement found on NTFE-Core,
 
 also, it can run on wf4 or other micro-kernel engine.
 
+NTFE-Core is complex, but BPM simple and effective, using written in a simple three-tier, like an common app and easy to learn.
+
 ## Showcase
 
 
