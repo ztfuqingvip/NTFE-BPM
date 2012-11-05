@@ -15,6 +15,7 @@ NTFE-Core is complex, but BPM simple and effective, using written in a simple th
 ## Build
 
 Depends on https://github.com/ali-ent/work-tool.git for building tools.
+
 Depends on https://github.com/ali-ent/NTFE-Core.git for core engine.
 
 .NET
@@ -66,7 +67,7 @@ sh run.sh
 castle/nhibernate upgrade record:
 https://github.com/codesharp/infrastructure/blob/master/upgrade.md
 
-[More](upgrade.md)
+[More](https://github.com/ali-ent/NTFE-BPM/blob/master/upgrade.md)
 
 
 ## NTFE-BPM License
@@ -96,7 +97,7 @@ https://github.com/codesharp/infrastructure/blob/master/upgrade.md
 - NTFE-Core https://github.com/ali-ent/NTFE-Core
 
 - Code# Infrastructure https://github.com/codesharp/infrastructure
-
+```shell
 	Copyright (c) CodeSharp.  All rights reserved. - http://www.icodesharp.com/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -114,6 +115,7 @@ https://github.com/codesharp/infrastructure/blob/master/upgrade.md
 	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 	See the License for the specific language governing permissions and limitations under the License.
+```
 
 - Log4net
 
