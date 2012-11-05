@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Apploader</name>
+    </assembly>
+    <members>
+        <member name="T:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader">
+            <summary>
+            动态AppDomain加载器
+            每个Domain和父Domain完全隔离，不共享程序集
+            检测每个目录的*.dll文件变化自动重新加载
+            <remarks>
+            根据目录分组加载，并自动监控目录改动重新加载
+            如：
+            自动扫描c:/root/
+            将c:/root/app1/加载为flag=app1的AppDomain
+            默认dll搜索目录为GAC，c:/root/app1/和c:/root/app1/bin
+            </remarks>
+            </summary>
+        </member>
+        <member name="F:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader._root">
+            <summary>
+            程序集目录组的根路径，如：c:/root/
+            </summary>
+        </member>
+        <member name="F:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader._apps">
+            <summary>
+            应用程序 键=AppDomain名称
+            </summary>
+        </member>
+        <member name="M:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.#ctor(System.String,Apploader.ILog)">
+            <summary>
+            初始化加载器 
+            </summary>
+            <param name="root">程序集目录组的根路径，如：c:/root/</param>
+            <param name="log"></param>
+        </member>
+        <member name="M:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.Scan">
+            <summary>
+            开始扫描
+            <remarks>
+            会忽略已加载的app目录以及含有app_offline.txt文件的目录
+            </remarks>
+            </summary>
+        </member>
+        <member name="M:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.Clear">
+            <summary>
+            卸载全部
+            </summary>
+        </member>
+        <member name="M:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.Reload(System.String)">
+            <summary>
+            重新加载指定应用
+            </summary>
+            <param name="directory">指定目录，从root目录下的子目录</param>
+        </member>
+        <member name="M:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.Unload(System.String)">
+            <summary>
+            卸载指定应用
+            </summary>
+            <param name="directory">指定目录，从root目录下的子目录</param>
+        </member>
+        <member name="M:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.GetAppPaths">
+            <summary>
+            获取所有已加载的路径
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.App">
+            <summary>
+            应用 AppDomainWrapper
+            </summary>
+        </member>
+        <member name="P:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.App.Locked">
+            <summary>
+            是否被锁定
+            </summary>
+        </member>
+        <member name="P:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.App.Key">
+            <summary>
+            标识
+            </summary>
+        </member>
+        <member name="P:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.App.Path">
+            <summary>
+            加载路径
+            </summary>
+        </member>
+        <member name="P:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.App.Domain">
+            <summary>
+            AppDomain
+            </summary>
+        </member>
+        <member name="P:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.App.Watcher">
+            <summary>
+            目录监控
+            </summary>
+        </member>
+        <member name="P:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.App.Utility">
+            <summary>
+            domain工具
+            </summary>
+        </member>
+        <member name="P:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.App.EntranceAssemblyName">
+            <summary>
+            入口程序集名称
+            </summary>
+        </member>
+        <member name="P:Taobao.Infrastructure.Toolkit.AppDomains.AppDomainLoader.App.EntranceTypeName">
+            <summary>
+            入口类型名称
+            </summary>
+        </member>
+        <member name="T:Apploader.ILog">
+            <summary>
+            日志记录器
+            日志记录请总是使用此类
+            </summary>
+        </member>
+        <member name="M:Apploader.ILog.Debug(System.Object)">
+            <summary>
+            记录调试信息
+            </summary>
+            <param name="message">内容格式</param>
+        </member>
+        <member name="M:Apploader.ILog.DebugFormat(System.String,System.Object[])">
+            <summary>
+            记录调试信息
+            </summary>
+            <param name="format">内容格式</param>
+            <param name="args">参数</param>
+        </member>
+        <member name="M:Apploader.ILog.Debug(System.Object,System.Exception)">
+            <summary>
+            记录调试信息
+            </summary>
+            <param name="message">错误内容</param>
+            <param name="exception">异常</param>
+        </member>
+        <member name="M:Apploader.ILog.Info(System.Object)">
+            <summary>
+            记录信息
+            </summary>
+            <param name="message">错误内容</param>
+        </member>
+        <member name="M:Apploader.ILog.InfoFormat(System.String,System.Object[])">
+            <summary>
+            记录信息
+            </summary>
+            <param name="format">内容格式</param>
+            <param name="args">参数</param>
+        </member>
+        <member name="M:Apploader.ILog.Info(System.Object,System.Exception)">
+            <summary>
+            记录信息
+            </summary>
+            <param name="message">错误内容</param>
+            <param name="exception">异常</param>
+        </member>
+        <member name="M:Apploader.ILog.Warn(System.Object)">
+            <summary>
+            记录警告
+            </summary>
+            <param name="message">内容格式</param>
+        </member>
+        <member name="M:Apploader.ILog.WarnFormat(System.String,System.Object[])">
+            <summary>
+            记录警告
+            </summary>
+            <param name="format">内容格式</param>
+            <param name="args">参数</param>
+        </member>
+        <member name="M:Apploader.ILog.Warn(System.Object,System.Exception)">
+            <summary>
+            记录警告
+            </summary>
+            <param name="message">错误内容</param>
+            <param name="exception">异常</param>
+        </member>
+        <member name="M:Apploader.ILog.Error(System.Object)">
+            <summary>
+            记录错误
+            </summary>
+            <param name="message">内容格式</param>
+        </member>
+        <member name="M:Apploader.ILog.ErrorFormat(System.String,System.Object[])">
+            <summary>
+            记录错误
+            </summary>
+            <param name="format">内容格式</param>
+            <param name="args">参数</param>
+        </member>
+        <member name="M:Apploader.ILog.Error(System.Object,System.Exception)">
+            <summary> 
+            记录错误
+            </summary>
+            <param name="message">错误内容</param>
+            <param name="exception">异常</param>
+        </member>
+        <member name="M:Apploader.ILog.Fatal(System.Object)">
+            <summary>
+            记录致命错误
+            </summary>
+            <param name="message">内容格式</param>
+        </member>
+        <member name="M:Apploader.ILog.FatalFormat(System.String,System.Object[])">
+            <summary>
+            记录致命错误
+            </summary>
+            <param name="format">内容格式</param>
+            <param name="args">参数</param>
+        </member>
+        <member name="M:Apploader.ILog.Fatal(System.Object,System.Exception)">
+            <summary> 
+            记录致命错误
+            </summary>
+            <param name="message">错误内容</param>
+            <param name="exception">异常</param>
+        </member>
+        <member name="P:Apploader.ILog.IsDebugEnabled">
+            <summary>
+            是否启用Debug级别
+            </summary>
+        </member>
+        <member name="P:Apploader.ILog.IsErrorEnabled">
+            <summary>
+            是否启用Error级别
+            </summary>
+        </member>
+        <member name="P:Apploader.ILog.IsFatalEnabled">
+            <summary>
+            是否启用Fatal级别
+            </summary>
+        </member>
+        <member name="P:Apploader.ILog.IsInfoEnabled">
+            <summary>
+            是否启用Info级别
+            </summary>
+        </member>
+        <member name="P:Apploader.ILog.IsWarnEnabled">
+            <summary>
+            是否启用Warn级别
+            </summary>
+        </member>
+        <member name="T:Taobao.Infrastructure.Toolkit.AppDomains.Entrance">
+            <summary>
+            声明AppDomain的加载入口
+            </summary>
+        </member>
+        <member name="M:Taobao.Infrastructure.Toolkit.AppDomains.Entrance.Main">
+            <summary>
+            AppDomain被加载后的入口方法
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Taobao.Infrastructure.Toolkit.AppDomains.Entrance.Unload">
+            <summary>
+            AppDomain的卸载方法
+            </summary>
+        </member>
+        <member name="T:Taobao.Infrastructure.Toolkit.AppDomains.Facade">
+            <summary>
+            运行于独立domain中
+            </summary>
+        </member>
+        <member name="M:Taobao.Infrastructure.Toolkit.AppDomains.Facade.LoadAssemblyFromFile(System.String)">
+            <summary>
+            从文件中加载程序集
+            </summary>
+            <param name="path"></param>
+            <returns>若含有入口则返回入口类型全名</returns>
+        </member>
+        <member name="T:Taobao.Infrastructure.Toolkit.AppDomains.IAssemblyLoader">
+            <summary>
+            提供程序集加载
+            </summary>
+        </member>
+    </members>
+</doc>

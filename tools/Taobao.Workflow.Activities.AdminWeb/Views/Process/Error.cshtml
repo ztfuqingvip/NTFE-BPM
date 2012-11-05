@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "流程异常";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var processTypes = ViewBag.ProcessTypes as Taobao.Workflow.Activities.Client.ProcessType[];
+    var total = ViewBag.Total;
+    var processes = ViewBag.Processes;
+    var page = Convert.ToInt32(Request["p"]);
+    page = page == 0 ? 1 : page;
+}
+@using Taobao.Workflow.Activities.AdminWeb.Controllers
+
+<h2>@ViewBag.Title</h2>
+
+<h3>
+    总数=@total
+</h3>
+<table border="1">
+    <tr>
+        <th>
+            流程类型
+        </th>
+        <th>
+            流程标题
+        </th>
+        <th>
+            发起人
+        </th>
+        <th>
+            开始时间
+        </th>
+        <th>
+            状态
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+    @if (processes != null)
+    {
+        foreach (Taobao.Workflow.Activities.Client.Process process in processes)
+        {
+            <tr>
+                <td>@process.ProcessType.Name
+                </td>
+                <td>@process.Title
+                </td>
+                <td>@process.Originator
+                </td>
+                <td>@process.CreateTime
+                </td>
+                <td>@EnumHelper.ToProcessStatusName(process.Status.ToString())
+                </td>
+                <td><input class="retryProcess_js" type="button" value="重试" tag="@process.ID" /> 
+                <input class="changeProcess_js" type="button" value="切换版本" tag="@process.ID" /> 
+                </td>
+            </tr>
+        }
+    }
+</table>
+@Html.ActionLink("首页", "Error", new
+{
+    p = 1
+}) 
+@Html.ActionLink("上一页", "Error", new
+{
+    p = page - 1
+}) 
+@Html.ActionLink("下一页", "Error", new
+{
+    p = page + 1
+}) 
+
+<script type="text/javascript">
+    $(function () {
+        $('.retryProcess_js').click(function () {
+            var tag = $(this).attr('tag');
+            $.ajax({
+                url: '/Process/RetryProcess',
+                type: 'post',
+                data: {
+                    processId: tag
+                },
+                success: function (result) {
+                    if (result == '') {
+                        location.reload();
+                    }
+                }
+            });
+        });
+
+        $('.changeProcess_js').click(function () {
+            var tag = $(this).attr('tag');
+            location.href = '/Process/Change?processId=' + tag;
+        });
+    });
+</script>

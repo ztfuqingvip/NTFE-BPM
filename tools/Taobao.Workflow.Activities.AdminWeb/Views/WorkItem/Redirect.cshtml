@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "任务转交";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string workItemId = ViewBag.WorkItemId.ToString();
+    string fromUser = ViewBag.FromUser;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    <table border="1">
+        <tr>
+            <td style="width:150px">
+                任务编号：
+            </td>
+            <td>@Html.Label("workItemId", workItemId)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                当前执行人：
+            </td>
+            <td>@Html.Label("fromUser", fromUser)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                转交给用户：
+            </td>
+            <td>@Html.TextBox("toUser", "", new { style="width:260px;" })
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="提交" />
+            </td>
+        </tr>
+    </table>
+}

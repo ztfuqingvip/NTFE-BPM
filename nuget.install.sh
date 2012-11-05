@@ -1,0 +1,1 @@
+mono --runtime=v4.0 ..\work-tool\nuget.exe install packages.config -o packages -ExcludeVersion -NoCache -source http://cs-nuget.apphb.com/nuget;http://nuget.org/api/v2/

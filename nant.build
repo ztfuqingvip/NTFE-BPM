@@ -1,0 +1,186 @@
+﻿<?xml version="1.0"?>
+<project name="NTFE" default="build">
+  <property name="project.config" value="Release" dynamic="true" />
+  <!--path-->
+  <property name="dir" value="."/>
+  <property name="dir.tools" value="../work-tool"/>
+  <property name="build.base" value="build\${project.config}"/>
+  <property name="build.absolutepath" value="${path::get-full-path(build.base)}" />
+  <property name="xpath.flag" value="/configuration/appSettings/add[@key='EnvironmentVersionFlag']/@value"/>
+  <property name="xpath.entrance" value="/configuration/appSettings/add[@key='AppDomainLoaderEntrance']/@value"/>
+  <!--msbuild-->
+  <property name="msbuild" value="C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe" />
+  <property name="msbuild.config" value="Debug" dynamic="true"/>
+  <if test="${project.config=='Release'}">
+    <property name="msbuild.config" value="Release"/>
+  </if>
+  <property name="msbuild.params"
+            value="/t:rebuild 
+            /p:Configuration=${msbuild.config} 
+            /t:ResolveReferences" />
+  <property name="msbuild.params.weboutput" value="/t:_CopyWebApplication /p:WebProjectOutputDir=${build.absolutepath}" />
+  <property name="msbuild.params.weboutput.mvc" value="/t:_CopyWebApplication /p:mvcbuildviews=true /p:WebProjectOutputDir=${build.absolutepath}" />
+  <property name="msbuild.params.output" value="/p:OutputPath=${build.absolutepath}" />
+  <!--nuget-->
+  <property name="nuget" value="${path::get-full-path(dir.tools)}" />
+  <property name="nuget.packages" value="${dir}\packages" />
+  <property name="nuget.cache" value="C:\Users\${environment::get-user-name()}\AppData\Local\NuGet\Cache" />
+  <property name="nuget.install" value="${dir}\nuget.install.bat" />
+  <property name="nuget.update" value="${dir}\nuget.update.bat" />
+  <property name="nuget.params.install" value="${nuget} ${path::get-full-path(nuget.packages)}" />
+  <!--NUnit-->
+  <property name="nunit" value="${path::get-full-path(dir.tools)}\nunit\nunit-console.exe" />
+  <!--lib-->
+  <property name="lib.copy" value="" dynamic="true" />
+
+  <!--clean-->
+  <target name="clean" description="clean build folder">
+    <delete dir="${build.absolutepath}"></delete>
+  </target>
+
+  <!--nuget install-->
+  <target name="nuget" description="nuget install">
+    <delete dir="${nuget.packages}"></delete>
+	  <delete dir="${nuget.cache}"></delete>
+    <exec program="${nuget.install}"
+          commandline="${nuget.params.install}"
+          workingdir="${dir}" />
+  </target>
+  
+  <!--Core Taobao.Activities-->
+  <target name="core">
+    <exec program="${msbuild}"
+          commandline="${msbuild.params} ${msbuild.params.output}
+          /p:DocumentationFile=${build.absolutepath}\Taobao.Activities.Xml"
+          workingdir="${dir}\src\Taobao.Activities" />
+    <!--copy to build-->
+    <copy todir="${build.absolutepath}\Core">
+      <fileset basedir="${build.absolutepath}">
+        <include name="Taobao.Activities.*" />
+      </fileset>
+    </copy>
+    <!--copy to lib-->
+    <copy todir="${dir}\external-bin\Workflow\" if="${lib.copy=='true'}">
+      <fileset basedir="${build.absolutepath}\Core">
+        <include name="*.*" />
+      </fileset>
+    </copy>
+  </target>
+  <!--Designer-->
+  <target name="designer">
+    <exec program="${msbuild}"
+          commandline="${msbuild.params} 
+          ${msbuild.params.output}\designer"
+           workingdir="${dir}\src\Taobao.Workflow.Activities.Designer" />
+    <delete>
+      <fileset>
+        <include name="${build.absolutepath}\designer\*.pdb" />
+        <include name="${build.absolutepath}\designer\*.application" />
+        <include name="${build.absolutepath}\designer\*.xml" />
+        <include name="${build.absolutepath}\designer\*.manifest" />
+      </fileset>
+    </delete>
+  </target>
+  <!--AdminWeb-->
+  <target name="web">
+    <exec program="${msbuild}"
+          commandline="${msbuild.params} 
+          ${msbuild.params.weboutput.mvc}\adminWeb_ntfe
+          ${msbuild.params.output}\adminWeb_ntfe\bin"
+           workingdir="${dir}\tools\Taobao.Workflow.Activities.AdminWeb" />
+    <delete>
+      <fileset>
+        <include name="${build.absolutepath}\adminWeb_ntfe\packages.config" />
+      </fileset>
+    </delete>
+    <copy todir="${build.absolutepath}\adminWeb_ntfe\Content\Silverlight">
+      <fileset basedir="${dir}\packages\Taobao.Designer.1.0\lib\sl40">
+        <include name="Taobao.Designer.xap" />
+      </fileset>
+    </copy>
+    <xmlpoke file="${build.absolutepath}\adminWeb_ntfe\Web.config"
+             xpath="${xpath.flag}"
+             value="${project.config}" />
+  </target>
+  <!--NTFE Client dll-->
+  <target name="client">
+    <exec program="${msbuild}"
+          commandline="${msbuild.params} ${msbuild.params.output} 
+          /p:DocumentationFile=${build.absolutepath}\Taobao.Workflow.Activities.Client.Xml"
+          workingdir="${dir}\src\Taobao.Workflow.Activities.Client" />
+    <!--copy to build-->
+    <copy todir="${build.absolutepath}\Client">
+      <fileset basedir="${build.absolutepath}">
+        <include name="Taobao.Workflow.Activities.Client.*" />
+      </fileset>
+    </copy>
+    <exec program="${msbuild}"
+          commandline="${msbuild.params} ${msbuild.params.output} 
+          /p:DocumentationFile=${build.absolutepath}\Taobao.Workflow.Activities.Management.Xml"
+          workingdir="${dir}\src\Taobao.Workflow.Activities.Management" />
+    <!--copy to build-->
+    <copy todir="${build.absolutepath}\Client">
+      <fileset basedir="${build.absolutepath}">
+        <include name="Taobao.Workflow.Activities.Management.*" />
+      </fileset>
+    </copy>
+  </target>
+  <!--NTFE-BPM Host-->
+  <target name="host" description="NTFE-BPM Host Nodes">
+    <exec program="${msbuild}"
+          commandline="${msbuild.params} 
+          ${msbuild.params.output}\node_ntfe_service\bin"
+          workingdir="${dir}\src\Taobao.Workflow.Host" />
+    <copy file="${build.absolutepath}\node_ntfe_service\bin\Taobao.Workflow.Host.dll.config" 
+          tofile="${build.absolutepath}\node_ntfe_service\app.config" />
+    <delete>
+      <fileset>
+        <include name="${build.absolutepath}\node_ntfe_service\packages.config" />
+        <include name="${build.absolutepath}\node_ntfe_service\bin\app.config" />
+      </fileset>
+    </delete>
+    <!--set flag-->
+    <xmlpoke file="${build.absolutepath}\node_ntfe_service\app.config"
+             xpath="${xpath.flag}"
+             value="${project.config}" />
+    <!--copy to nodes-->
+    <copy todir="${build.absolutepath}\node_ntfe_scheduler">
+      <fileset basedir="${build.absolutepath}\node_ntfe_service">
+        <include name="*.*" />
+        <include name="*\*.*" />
+      </fileset>
+    </copy>
+    <!--set entrance-->
+    <xmlpoke file="${build.absolutepath}\node_ntfe_service\app.config"
+             xpath="${xpath.entrance}"
+             value="Taobao.Workflow.Host.ServiceEntrance,Taobao.Workflow.Host" />
+    <xmlpoke file="${build.absolutepath}\node_ntfe_scheduler\app.config"
+             xpath="${xpath.entrance}"
+             value="Taobao.Workflow.Host.SchedulerEntrance,Taobao.Workflow.Host" />
+  </target>
+  
+  <target name="test_bpm">
+    <exec program="${msbuild}"
+          commandline="${msbuild.params} ${msbuild.params.output}\ntfe_bpm_test"
+          workingdir="${dir}\src\Taobao.Workflow.Activities.Test" />
+    <exec program="${nunit}" commandline="Taobao.Workflow.Activities.Test.dll" workingdir="${build.absolutepath}\ntfe_bpm_test"/>
+  </target>
+  <target name="test_host">
+    <exec program="${msbuild}"
+          commandline="${msbuild.params} ${msbuild.params.output}\ntfe_bpm_host_test"
+          workingdir="${dir}\src\Taobao.Workflow.Host.Test" />
+    <xmlpoke file="${build.absolutepath}\ntfe_bpm_host_test\Taobao.Workflow.Host.Test.dll.config"
+             xpath="/configuration/appSettings/add[@key='CenterUri']/@value"
+             value="tcp://taobao-dev-ntfe01:1234/remote.rem"
+             if="${project.config=='Debug'}" />
+    <xmlpoke file="${build.absolutepath}\ntfe_bpm_host_test\Taobao.Workflow.Host.Test.dll.config"
+             xpath="/configuration/appSettings/add[@key='CenterUri']/@value"
+             value="tcp://taobao-test-ntfe01:1234/remote.rem"
+             if="${project.config=='Test'}" />
+    <xmlpoke file="${build.absolutepath}\ntfe_bpm_host_test\Taobao.Workflow.Host.Test.dll.config"
+             xpath="/configuration/appSettings/add[@key='CenterUri']/@value"
+             value="tcp://10.13.3.59:8000/remote.rem"
+             if="${project.config=='Release'}" />
+    <exec program="${nunit}" commandline="Taobao.Workflow.Host.Test.dll" workingdir="${build.absolutepath}\ntfe_bpm_host_test" if="${project.config!='Release'}"/>
+  </target>
+</project>

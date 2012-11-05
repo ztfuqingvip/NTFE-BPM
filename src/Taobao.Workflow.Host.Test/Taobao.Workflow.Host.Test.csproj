@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8818A0D7-0C45-44F5-97BE-F4CA785E2B02}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Taobao.Workflow.Host.Test</RootNamespace>
+    <AssemblyName>Taobao.Workflow.Host.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Taobao.Package.Castle.2.1\lib\net35\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\packages\Taobao.Package.Castle.2.1\lib\net35\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.MicroKernel">
+      <HintPath>..\..\packages\Taobao.Package.Castle.2.1\lib\net35\Castle.MicroKernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\packages\Taobao.Package.Castle.2.1\lib\net35\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\Taobao.Package.Log4net.1.2\lib\net35\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Taobao.Application">
+      <HintPath>..\..\packages\Taobao.Model.1.0\lib\net35\Taobao.Application.dll</HintPath>
+    </Reference>
+    <Reference Include="Taobao.Infrastructure">
+      <HintPath>..\..\packages\Taobao.AppInfrastructure.1.0\lib\net40\Taobao.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Taobao.Infrastructure.Castles">
+      <HintPath>..\..\packages\Taobao.Infrastructure.Castles.1.0\lib\net40\Taobao.Infrastructure.Castles.dll</HintPath>
+    </Reference>
+    <Reference Include="Taobao.Model">
+      <HintPath>..\..\packages\Taobao.Model.1.0\lib\net35\Taobao.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Taobao.ServiceFramework">
+      <HintPath>..\..\packages\Taobao.ServiceFramework.1.2\lib\net35\Taobao.ServiceFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Taobao.ServiceFramework.Castles">
+      <HintPath>..\..\packages\Taobao.ServiceFramework.Castles.1.2\lib\net35\Taobao.ServiceFramework.Castles.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EngineTest.cs" />
+    <Compile Include="ProcessTest1.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ProcessTest2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BaseTest.cs" />
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Taobao.Workflow.Activities.Client\Taobao.Workflow.Activities.Client.csproj">
+      <Project>{3102C63F-1AFE-4B91-8027-B5E2DEBDE872}</Project>
+      <Name>Taobao.Workflow.Activities.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taobao.Workflow.Activities.Management\Taobao.Workflow.Activities.Management.csproj">
+      <Project>{93E7E305-FFD0-489F-BEC5-B6E96BB87A71}</Project>
+      <Name>Taobao.Workflow.Activities.Management</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

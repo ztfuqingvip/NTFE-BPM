@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "新建流程类型";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Create", "ProcessType", FormMethod.Post, new {  enctype = "multipart/form-data" }))
+{
+    <table border="1">
+        <tr>
+            <td style="width:150px">
+                流程类型名称：
+            </td>
+            <td>@Html.TextBox("processTypeName")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                流程类型描述：
+            </td>
+            <td>@Html.TextArea("description", new { style = "width:300px;height:100px" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                流程分组：
+            </td>
+            <td>@Html.TextBox("group")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                流程附件：
+            </td>
+            <td><input type="file" name="processTypeFile" />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="提交" />
+            </td>
+        </tr>
+    </table>
+}

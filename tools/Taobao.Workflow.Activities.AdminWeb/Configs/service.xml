@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<services>
+  <service name="getSuperiors" description="getSuperiors-获取N级主管列表" hasReturnValue="true">
+    <parameter name="user" type="System.String" description="可以是域账号/花名/用户ID" />
+    <parameter name="upper" type="System.Int32" description="向上查找的层数" />
+    <parameter name="lessThenLevel" type="System.Int32" description="查找到小于该级别" />
+  </service>
+  <service name="getUpperSuperior" description="getUpperSuperior-获取N级主管" hasReturnValue="true">
+    <parameter name="user" type="System.String" description="可以是域账号/花名/用户ID" />
+    <parameter name="upper" type="System.Int32" description="向上查找的层数" />
+    <parameter name="lessThenLevel" type="System.Int32" description="查找到小于该级别" />
+  </service>
+  <service name="getSuperiorsInRole" description="getSuperiorsInRole-获取处于指定角色的N级主管" hasReturnValue="true">
+    <parameter name="user" type="System.String" description="可以是域账号/花名/用户ID" />
+    <parameter name="upper" type="System.Int32" description="向上查找的层数" />
+    <parameter name="role" type="System.String" description="角色名称或key" />
+  </service>
+  <service name="getUsers" description="getUsers-获取关联业务分类/关联角色/关联用户的用户列表，兼容老接口" hasReturnValue="true">
+    <parameter name="role" type="System.String" description="角色名称或key" />
+    <parameter name="user" type="System.String" description="可以是域账号/花名/用户ID" />
+    <parameter name="categoryId" type="System.String" description="业务分类标识" />
+  </service>
+  <service name="updateDataField" description="updateDataField-更新流程变量" hasReturnValue="false">
+    <parameter name="key" type="System.String" description="流程变量名，使用变量赋值时注意实际使用的是该变量的值" />
+    <parameter name="value" type="System.String" description="要设置的值" />
+  </service>
+  <service name="split" description="split-提供对字符串的拆分功能，返回字符串数组" hasReturnValue="true">
+    <parameter name="separator" type="System.String" description="分隔符" />
+    <parameter name="input" type="System.String" description="输入的字符串" />
+  </service>
+  <service name="forward" description="forward-转发服务，提供对服务Taobao.Facades.IForwardService的调用，返回目标地址返回的原始文本" hasReturnValue="true">
+    <parameter name="target" type="System.String" description="要调用的目前服务配置键，即配置表ServceiList中定义的键" />
+    <parameter name="authParameters" type="System.String" description="验证参数，若需要额外的身份验证则设置此项，json字符串" />
+    <parameter name="parameters" type="System.String" description="调用时附加的参数，json字符串" />
+  </service>
+  <service name="getSuperior" description="获取流程发起人的主管" hasReturnValue="true" />
+</services>

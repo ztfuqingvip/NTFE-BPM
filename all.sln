@@ -1,0 +1,126 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Activities", "..\NTFE-Core\src\Taobao.Activities\Taobao.Activities.csproj", "{4E02A977-89AE-4792-BC25-91B36ED56866}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Activities.Test", "..\NTFE-Core\src\Taobao.Activities.Test\Taobao.Activities.Test.csproj", "{42301779-9772-485E-B597-5F46AC36A089}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NTFE-BPM", "NTFE-BPM", "{66F3B2B3-B592-4F7B-AA72-BA9A0E9EC758}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Activities", "src\Taobao.Workflow.Activities\Taobao.Workflow.Activities.csproj", "{A18A335B-F0FD-4FE2-A854-EB6BD2CF17F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Activities.Mappings", "src\Taobao.Workflow.Activities.Mappings\Taobao.Workflow.Activities.Mappings.csproj", "{3DBF35A9-BB3B-4857-9D14-CE353CC92B9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Activities.Repositories", "src\Taobao.Workflow.Activities.Repositories\Taobao.Workflow.Activities.Repositories.csproj", "{379128FB-3DE2-4C46-8865-CC61F689764F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Activities.Application", "src\Taobao.Workflow.Activities.Application\Taobao.Workflow.Activities.Application.csproj", "{99801043-80A6-4818-96D3-5989500C3F3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Activities.Client", "src\Taobao.Workflow.Activities.Client\Taobao.Workflow.Activities.Client.csproj", "{3102C63F-1AFE-4B91-8027-B5E2DEBDE872}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Activities.Management", "src\Taobao.Workflow.Activities.Management\Taobao.Workflow.Activities.Management.csproj", "{93E7E305-FFD0-489F-BEC5-B6E96BB87A71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Activities.Test", "src\Taobao.Workflow.Activities.Test\Taobao.Workflow.Activities.Test.csproj", "{733822AC-5EFD-4DB0-A97E-A4AC27036FCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "client", "client", "{E395EB15-7F52-4980-BFBE-0D5FC22765F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Activities.Converters", "src\Taobao.Workflow.Activities.Converters\Taobao.Workflow.Activities.Converters.csproj", "{E3606D8F-F315-4E4C-9C15-205FB82BC948}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "converter", "converter", "{517D4902-FBF7-40CB-8E38-51D2B4531CBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Activities.Designer.Statements", "src\Taobao.Workflow.Activities.Designer.Statements\Taobao.Workflow.Activities.Designer.Statements.csproj", "{39D20162-DF3B-47A0-87AC-A166C7F4E458}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{00F24804-CDFE-4D01-886A-17BA96B104BF}"
+	ProjectSection(SolutionItems) = preProject
+		build.bat = build.bat
+		build.sh = build.sh
+		license.txt = license.txt
+		nant.build = nant.build
+		nuget.install.bat = nuget.install.bat
+		README.md = README.md
+		upgrade.md = upgrade.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{D759E7E2-21AF-41D0-9CF3-B17F25036B28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Activities.AdminWeb", "tools\Taobao.Workflow.Activities.AdminWeb\Taobao.Workflow.Activities.AdminWeb.csproj", "{7A33956E-5364-4668-902B-998664848417}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Host", "src\Taobao.Workflow.Host\Taobao.Workflow.Host.csproj", "{721E87A9-2331-4FC1-8AB8-8F495EC84141}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E02A977-89AE-4792-BC25-91B36ED56866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E02A977-89AE-4792-BC25-91B36ED56866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E02A977-89AE-4792-BC25-91B36ED56866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E02A977-89AE-4792-BC25-91B36ED56866}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42301779-9772-485E-B597-5F46AC36A089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42301779-9772-485E-B597-5F46AC36A089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42301779-9772-485E-B597-5F46AC36A089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42301779-9772-485E-B597-5F46AC36A089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A18A335B-F0FD-4FE2-A854-EB6BD2CF17F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A18A335B-F0FD-4FE2-A854-EB6BD2CF17F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A18A335B-F0FD-4FE2-A854-EB6BD2CF17F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A18A335B-F0FD-4FE2-A854-EB6BD2CF17F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DBF35A9-BB3B-4857-9D14-CE353CC92B9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DBF35A9-BB3B-4857-9D14-CE353CC92B9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DBF35A9-BB3B-4857-9D14-CE353CC92B9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DBF35A9-BB3B-4857-9D14-CE353CC92B9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{379128FB-3DE2-4C46-8865-CC61F689764F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{379128FB-3DE2-4C46-8865-CC61F689764F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{379128FB-3DE2-4C46-8865-CC61F689764F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{379128FB-3DE2-4C46-8865-CC61F689764F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99801043-80A6-4818-96D3-5989500C3F3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99801043-80A6-4818-96D3-5989500C3F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99801043-80A6-4818-96D3-5989500C3F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99801043-80A6-4818-96D3-5989500C3F3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3102C63F-1AFE-4B91-8027-B5E2DEBDE872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3102C63F-1AFE-4B91-8027-B5E2DEBDE872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3102C63F-1AFE-4B91-8027-B5E2DEBDE872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3102C63F-1AFE-4B91-8027-B5E2DEBDE872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93E7E305-FFD0-489F-BEC5-B6E96BB87A71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93E7E305-FFD0-489F-BEC5-B6E96BB87A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93E7E305-FFD0-489F-BEC5-B6E96BB87A71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93E7E305-FFD0-489F-BEC5-B6E96BB87A71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{733822AC-5EFD-4DB0-A97E-A4AC27036FCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{733822AC-5EFD-4DB0-A97E-A4AC27036FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{733822AC-5EFD-4DB0-A97E-A4AC27036FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{733822AC-5EFD-4DB0-A97E-A4AC27036FCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3606D8F-F315-4E4C-9C15-205FB82BC948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3606D8F-F315-4E4C-9C15-205FB82BC948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3606D8F-F315-4E4C-9C15-205FB82BC948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3606D8F-F315-4E4C-9C15-205FB82BC948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39D20162-DF3B-47A0-87AC-A166C7F4E458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39D20162-DF3B-47A0-87AC-A166C7F4E458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39D20162-DF3B-47A0-87AC-A166C7F4E458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39D20162-DF3B-47A0-87AC-A166C7F4E458}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A33956E-5364-4668-902B-998664848417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A33956E-5364-4668-902B-998664848417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A33956E-5364-4668-902B-998664848417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A33956E-5364-4668-902B-998664848417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{721E87A9-2331-4FC1-8AB8-8F495EC84141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{721E87A9-2331-4FC1-8AB8-8F495EC84141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{721E87A9-2331-4FC1-8AB8-8F495EC84141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{721E87A9-2331-4FC1-8AB8-8F495EC84141}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A18A335B-F0FD-4FE2-A854-EB6BD2CF17F1} = {66F3B2B3-B592-4F7B-AA72-BA9A0E9EC758}
+		{3DBF35A9-BB3B-4857-9D14-CE353CC92B9B} = {66F3B2B3-B592-4F7B-AA72-BA9A0E9EC758}
+		{379128FB-3DE2-4C46-8865-CC61F689764F} = {66F3B2B3-B592-4F7B-AA72-BA9A0E9EC758}
+		{99801043-80A6-4818-96D3-5989500C3F3F} = {66F3B2B3-B592-4F7B-AA72-BA9A0E9EC758}
+		{E395EB15-7F52-4980-BFBE-0D5FC22765F0} = {66F3B2B3-B592-4F7B-AA72-BA9A0E9EC758}
+		{733822AC-5EFD-4DB0-A97E-A4AC27036FCD} = {66F3B2B3-B592-4F7B-AA72-BA9A0E9EC758}
+		{517D4902-FBF7-40CB-8E38-51D2B4531CBD} = {66F3B2B3-B592-4F7B-AA72-BA9A0E9EC758}
+		{93E7E305-FFD0-489F-BEC5-B6E96BB87A71} = {E395EB15-7F52-4980-BFBE-0D5FC22765F0}
+		{3102C63F-1AFE-4B91-8027-B5E2DEBDE872} = {E395EB15-7F52-4980-BFBE-0D5FC22765F0}
+		{E3606D8F-F315-4E4C-9C15-205FB82BC948} = {517D4902-FBF7-40CB-8E38-51D2B4531CBD}
+		{39D20162-DF3B-47A0-87AC-A166C7F4E458} = {517D4902-FBF7-40CB-8E38-51D2B4531CBD}
+		{7A33956E-5364-4668-902B-998664848417} = {D759E7E2-21AF-41D0-9CF3-B17F25036B28}
+		{721E87A9-2331-4FC1-8AB8-8F495EC84141} = {D759E7E2-21AF-41D0-9CF3-B17F25036B28}
+	EndGlobalSection
+EndGlobal

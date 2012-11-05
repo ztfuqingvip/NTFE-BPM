@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var errors = ViewBag.Errors;
+    var total = ViewBag.Total;
+    var page = Convert.ToInt32(Request["p"]);
+    page = page == 0 ? 1 : page;
+}
+<h2>
+    流程异常/错误管理</h2>
+    <h3>
+    总数=@total
+</h3>
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <th>
+                选择
+            </th>
+            <th>
+                流程类型
+            </th>
+            <th>
+                流程标题
+            </th>
+            <th>
+                发生时间
+            </th>
+            <th>
+                原因
+            </th>
+        </tr>
+        @if (errors != null)
+        {
+            foreach (Taobao.Workflow.Activities.Management.ErrorRecord e in errors)
+            {
+            <tr>
+                <td>
+                    <input class="retryProcess_js" type="button" value="重试" tag="@e.Process.ID" /> 
+                </td>
+                <td>@e.Process.ProcessType.Name
+                </td>
+                <td>@e.Process.Title
+                </td>
+                <td>@e.CreateTime
+                </td>
+                <td align="center" style="width: 500px">@Html.TextArea("reason", e.Reason, new { style = "width:100%;height:150px" })
+                </td>
+            </tr>
+            }
+        }
+    </table>
+}
+
+@Html.ActionLink("首页", "Index", new
+{
+    p = 1
+}) 
+@Html.ActionLink("上一页", "Index", new
+{
+    p = page - 1
+}) 
+@Html.ActionLink("下一页", "Index", new
+{
+    p = page + 1
+}) 
+
+<script type="text/javascript">
+    $(function () {
+        $('.retryProcess_js').click(function () {
+            var tag = $(this).attr('tag');
+            $.ajax({
+                url: '/Error/RetryProcess',
+                type: 'post',
+                data: {
+                    processId: tag
+                },
+                success: function (result) {
+                    if (result == '') {
+                        location.reload();
+                    }
+                }
+            });
+        });
+    });
+</script>

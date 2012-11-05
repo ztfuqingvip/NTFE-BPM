@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "流程类型管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var total = (int)ViewBag.Total;
+    var processTypes = ViewBag.ProcessTypes;
+}
+
+<h2>@ViewBag.Title</h2>
+<h3>
+    总数=@total
+</h3>
+
+@using (Html.BeginForm())
+{
+<table border="1">
+    <tr>
+        <th>
+            流程名
+        </th>
+        <th>
+            描述
+        </th>
+        <th>
+            版本号
+        </th>
+        <th>
+            分组信息
+        </th>
+        <th>
+            当前版本
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+    @foreach (Taobao.Workflow.Activities.Client.ProcessType processType in processTypes)
+    {
+        <tr>
+            <td>@processType.Name
+            </td>
+            <td>@processType.Description
+            </td>
+            <td>@processType.Version
+            </td>
+            <td>@processType.Group
+            </td>
+            <td>@Html.Raw(processType.IsCurrent ? "<span style=color:red>是</span>" : "否")
+            </td>
+            <td><input class="setVersion_js" type="button" value="设置为默认" tag="@processType.Version" />
+            </td>
+        </tr>
+    }
+</table>
+}
+@Html.ActionLink("首页", "Version", new { processTypeName = Request.QueryString["processTypeName"], p = 1 }) 
+@Html.ActionLink("上一页", "Version", new { processTypeName = Request.QueryString["processTypeName"], p = Convert.ToInt32(Request.QueryString["p"]) - 1 }) 
+@Html.ActionLink("下一页", "Version", new { processTypeName = Request.QueryString["processTypeName"], p = (Convert.ToInt32(Request.QueryString["p"]) == 0 ? 1 : Convert.ToInt32(Request.QueryString["p"])) + 1 }) 
+
+<script type="text/javascript">
+    $(function () {
+        var processTypeName = '@Request.QueryString["processTypeName"]';
+        $('.setVersion_js').click(function () {
+            var tag = $(this).attr('tag');
+            $.ajax({
+                url: '/ProcessType/SetVersion',
+                type: 'post',
+                data: {
+                    processTypeName: processTypeName,
+                    version: tag
+                },
+                success: function (result) {
+                    if (result == '') {
+                        location.reload();
+                    }
+                }
+            });
+        });
+    });
+</script>

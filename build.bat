@@ -1,0 +1,1 @@
+..\work-tool\nant\nant %1 -D:project.config=%2 -D:runtime=dotnet

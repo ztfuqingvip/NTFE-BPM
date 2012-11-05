@@ -1,0 +1,141 @@
+﻿<html>
+<head>
+    <title>@ViewBag.Title - NTFE-BPM AdminWeb</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            font-family: monaca,微软雅黑,Arial;
+        }
+        body {
+            margin: 10px;
+        }
+        a {
+            color: #000080;
+            text-decoration: none;
+        }
+        h2 {
+            height: 30px;
+            line-height: 30px;
+            font-size: 12px;
+            border: 1px #000 solid;
+            padding-left: 10px;
+            margin-bottom: 10px;
+            color: #000;
+            background: #ffa07a;
+        }
+        h3 {
+            line-height: 25px;
+            font-size: 12px;
+            font-weight: normal;
+            border: 1px #778899 solid;
+            padding: 5px 0 5px 10px;
+            margin-bottom: 10px;
+            background: #b0e0e6;
+        }
+        table {
+            width: 100%;
+            border: 1px #ccc solid;
+            margin-bottom: 10px;
+            border-top: 1px #ccc solid;
+            border-left: 1px #ccc solid;
+        }
+        table th {
+            line-height: 30px;
+            color: #808080;
+            border-right: 1px #ccc solid;
+            border-bottom: 1px #ccc solid;
+        }
+        table td {
+            padding: 5px;
+            line-height: 20px;
+            border-right: 1px #ccc solid;
+            border-bottom: 1px #ccc solid;
+        }
+        table td.td-100 {
+            width: 100px;
+        }
+        table th.th-200 {
+            width: 200px;
+        }
+        table th.th-300 {
+            width: 300px;
+        }
+        .nav {
+            margin-bottom: 10px;
+        }
+        .nav a {
+            padding: 0 5px;
+            display: inline-block;
+            height: 25px;
+            line-height: 25px;
+            border: 1px #ccc solid;
+            text-decoration: none;
+            color: #000;
+        }
+        .nav a:hover {
+            background-color: #ccc;
+        }
+        b {
+            color: Red;
+            background: yellow;
+        }
+        input[type=button], input[type=submit] {
+            padding: 1px 5px;
+            border: 1px #000 solid;
+            cursor: pointer;
+        }
+        #error {
+            display: none;
+            background: #f0e68c;
+            padding: 5px;
+            text-align: center;
+            font-size: 14px;
+            border: 1px #ccc solid;
+            color: Red;
+        }
+    </style>
+    <script type="text/javascript" src="http://wfstatic.taobao.org/resources/mvcres/Scripts/core/jquery.js"></script>
+</head>
+<body>
+    <div class="nav">
+        @Html.ActionLink("NTFE-Designer", "Index", "Designer")
+        @Html.ActionLink("流程类型管理", "Index", "ProcessType")
+        @Html.ActionLink("流程管理", "Index", "Process")
+        @Html.ActionLink("流程异常", "Error", "Process")
+        @Html.ActionLink("任务管理", "Index", "WorkItem")
+        @Html.ActionLink("异常管理", "Index", "Error")
+        - 当前用户：@User.Identity.Name
+    </div>
+    <h3 id="error">
+    </h3>
+    @RenderBody()
+    <div style="margin: auto; color: #ccc">
+        © 2012 NTFE-BPM</div>
+    @if ((ViewData["message"] != null && !string.IsNullOrWhiteSpace(ViewData["message"].ToString()))
+        || (Request["message"] != null && !string.IsNullOrWhiteSpace(Request["message"].ToString())))
+    { 
+        <script type="text/javascript">
+            var message = '@(ViewData["message"] ?? Request["message"])';
+        </script>
+    }
+    <script type="text/javascript">
+        $(function () {
+            $.ajaxSetup({
+                cache: false,
+                error: function (x, e) {
+                    showMessage('发生错误：' + x.responseText);
+                }
+            });
+
+            if (typeof (message) != 'undefined' && message != '')
+                showMessage(message);
+        });
+        function showMessage(m) {
+            $('#error').html(m).fadeIn().focus();
+            setTimeout(function () { $('#error').fadeOut() }, 3000);
+        }
+    </script>
+</body>
+</html>

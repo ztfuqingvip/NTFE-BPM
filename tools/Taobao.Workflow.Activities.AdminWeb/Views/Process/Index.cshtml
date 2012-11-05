@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "流程管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var processTypes = ViewBag.ProcessTypes as Taobao.Workflow.Activities.Client.ProcessType[];
+    var total = ViewBag.Total;
+    var processes = ViewBag.Processes;
+    var page = Convert.ToInt32(Request["p"]);
+    page = page == 0 ? 1 : page;
+    string type = ViewBag.Type;
+    string processTitle = ViewBag.ProcessTitle ?? "";
+    string originator = ViewBag.Originator ?? "";
+    string status = ViewBag.Status ?? "";
+}
+@using Taobao.Workflow.Activities.AdminWeb.Controllers
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    <h3>流程类型：@Html.DropDownList("type", processTypes
+    .Select(o => new SelectListItem() { Text = o.Description + "-" + o.Name, Value = o.Name })) 
+    流程标题：@Html.TextBox("processTitle", processTitle, new { style = "width:150px" }) 
+    <br />
+    发起人：@Html.TextBox("originator", originator, new { style = "width:150px" }) 
+    流程状态：@Html.DropDownList("status", typeof(Taobao.Workflow.Activities.Client.ProcessStatus).GetEnumNames()
+        .Select(o => new SelectListItem() { Text = EnumHelper.ToProcessStatusName(o), Value = o }), "--请选择--") 
+    <input type="submit" value="查询" />
+    </h3>
+}
+
+<h3>
+    总数=@total
+</h3>
+<table border="1">
+    <tr>
+        <th>
+            流程类型
+        </th>
+        <th>
+            流程标题
+        </th>
+        <th>
+            发起人
+        </th>
+        <th>
+            开始时间
+        </th>
+        <th>
+            状态
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+    @if (processes != null)
+    {
+        foreach (Taobao.Workflow.Activities.Client.Process process in processes)
+        {
+            <tr>
+                <td>@process.ProcessType.Name
+                </td>
+                <td>@process.Title
+                </td>
+                <td>@process.Originator
+                </td>
+                <td>@process.CreateTime
+                </td>
+                <td>@EnumHelper.ToProcessStatusName(process.Status.ToString())
+                </td>
+                <td><input class="stopProcess_js" type="button" value="停止" tag="@process.ID" /> 
+                <input class="restartProcess_js" type="button" value="继续" tag="@process.ID" /> 
+                <input class="deleteProcess_js" type="button" value="删除" tag="@process.ID" /> 
+                <input class="redirectProcess_js" type="button" value="GOTO" tag="@process.ID" /> 
+                </td>
+            </tr>
+        }
+    }
+</table>
+@Html.ActionLink("首页", "Index", new
+{
+    p = 1,
+    type = type,
+    processTitle = processTitle,
+    originator = originator,
+    status = status,   
+}) 
+@Html.ActionLink("上一页", "Index", new
+{
+    p = page - 1,
+    type = type,
+    processTitle = processTitle,
+    originator = originator,
+    status = status, 
+}) 
+@Html.ActionLink("下一页", "Index", new
+{
+    p = page + 1,
+    type = type,
+    processTitle = processTitle,
+    originator = originator,
+    status = status,
+}) 
+
+<script type="text/javascript">
+    $(function () {
+        $('.stopProcess_js').click(function () {
+            var tag = $(this).attr('tag');
+            $.ajax({
+                url: '/Process/StopProcess',
+                type: 'post',
+                data: {
+                    processId: tag
+                },
+                success: function (result) {
+                    if (result == '') {
+                        location.reload();
+                    }
+                }
+            });
+        });
+
+        $('.restartProcess_js').click(function () {
+            var tag = $(this).attr('tag');
+            $.ajax({
+                url: '/Process/RestartProcess',
+                type: 'post',
+                data: {
+                    processId: tag
+                },
+                success: function (result) {
+                    if (result == '') {
+                        location.reload();
+                    }
+                }
+            });
+        });
+
+        $('.deleteProcess_js').click(function () {
+            var tag = $(this).attr('tag');
+            $.ajax({
+                url: '/Process/DeleteProcess',
+                type: 'post',
+                data: {
+                    processId: tag
+                },
+                success: function (result) {
+                    if (result == '') {
+                        location.reload();
+                    }
+                }
+            });
+        });
+
+        $('.redirectProcess_js').click(function () {
+            var tag = $(this).attr('tag');
+            location.href = '/Process/Goto?processId=' + tag;
+        });
+    });
+</script>

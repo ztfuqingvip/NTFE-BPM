@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "流程类型管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var processTypes = ViewBag.ProcessTypes;
+    var total = (int)ViewBag.Total;
+}
+
+<h2>@ViewBag.Title</h2>
+<h3>
+    @Html.ActionLink("新建流程类型", "Create")
+</h3>
+<h3>
+    总数=@total
+</h3>
+<table border="1">
+    <tr>
+        <th>
+            流程名
+        </th>
+        <th>
+            描述
+        </th>
+        <th>
+            创建时间
+        </th>
+        <th>
+            版本号
+        </th>
+        <th>
+            分组信息
+        </th>
+    </tr>
+    @if (processTypes != null)
+    {
+        foreach (Taobao.Workflow.Activities.Client.ProcessType processType in processTypes)
+        {
+        <tr>
+            <td>@Html.ActionLink(processType.Name
+                , "Version"
+                , new RouteValueDictionary(new Dictionary<string, object>() { { "processTypeName", processType.Name } })
+                , new Dictionary<string, object>() { { "target", "_blank" } })
+            </td>
+            <td>@processType.Description
+            </td>
+            <td>@processType.CreateTime
+            </td>
+            <td>@processType.Version
+            </td>
+            <td>@processType.Group
+            </td>
+        </tr>
+        }
+    }
+</table>
+@Html.ActionLink("首页", "Index", new { p = 1 }) 
+@Html.ActionLink("上一页", "Index", new { p = Convert.ToInt32(Request.QueryString["p"]) - 1 }) 
+@Html.ActionLink("下一页", "Index", new { p = (Convert.ToInt32(Request.QueryString["p"]) == 0 ? 1 : Convert.ToInt32(Request.QueryString["p"]))  + 1 }) 
+

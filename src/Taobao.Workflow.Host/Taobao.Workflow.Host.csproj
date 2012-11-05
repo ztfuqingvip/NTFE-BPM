@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{721E87A9-2331-4FC1-8AB8-8F495EC84141}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Taobao.Workflow.Host</RootNamespace>
+    <AssemblyName>Taobao.Workflow.Host</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Apploader">
+      <HintPath>..\..\lib\Apploader.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\packages\Castle.Windsor\lib\net40\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeSharp.Core">
+      <HintPath>..\..\packages\CodeSharp.Core\lib\net40\CodeSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeSharp.Core.Castles">
+      <HintPath>..\..\packages\CodeSharp.Core.Castles\lib\net40\CodeSharp.Core.Castles.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeSharp.Framework">
+      <HintPath>..\..\packages\CodeSharp.Framework\lib\net40\CodeSharp.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeSharp.Framework.Castles">
+      <HintPath>..\..\packages\CodeSharp.Framework.Castles\lib\net40\CodeSharp.Framework.Castles.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\packages\CodeSharp.Core.Castles\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\packages\Iesi.Collections\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Jurassic">
+      <HintPath>..\..\packages\Jurassic\lib\Jurassic.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\packages\NHibernate\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Taobao.Workflow.Client">
+      <HintPath>..\..\lib\Taobao.Workflow.Client.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EventBus.cs" />
+    <Compile Include="HumanEscalationHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchedulerEntrance.cs" />
+    <Compile Include="ServiceEntrance.cs" />
+    <Compile Include="SubProcessHelper.cs" />
+    <Compile Include="Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\NTFE-Core\src\Taobao.Activities.Test\Taobao.Activities.Test.csproj">
+      <Project>{42301779-9772-485e-b597-5f46ac36a089}</Project>
+      <Name>Taobao.Activities.Test</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NTFE-Core\src\Taobao.Activities\Taobao.Activities.csproj">
+      <Project>{4e02a977-89ae-4792-bc25-91b36ed56866}</Project>
+      <Name>Taobao.Activities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taobao.Workflow.Activities.Application\Taobao.Workflow.Activities.Application.csproj">
+      <Project>{99801043-80a6-4818-96d3-5989500c3f3f}</Project>
+      <Name>Taobao.Workflow.Activities.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taobao.Workflow.Activities.Client\Taobao.Workflow.Activities.Client.csproj">
+      <Project>{3102c63f-1afe-4b91-8027-b5e2debde872}</Project>
+      <Name>Taobao.Workflow.Activities.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taobao.Workflow.Activities.Converters\Taobao.Workflow.Activities.Converters.csproj">
+      <Project>{e3606d8f-f315-4e4c-9c15-205fb82bc948}</Project>
+      <Name>Taobao.Workflow.Activities.Converters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taobao.Workflow.Activities.Designer.Statements\Taobao.Workflow.Activities.Designer.Statements.csproj">
+      <Project>{39d20162-df3b-47a0-87ac-a166c7f4e458}</Project>
+      <Name>Taobao.Workflow.Activities.Designer.Statements</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taobao.Workflow.Activities.Management\Taobao.Workflow.Activities.Management.csproj">
+      <Project>{93e7e305-ffd0-489f-bec5-b6e96bb87a71}</Project>
+      <Name>Taobao.Workflow.Activities.Management</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taobao.Workflow.Activities.Mappings\Taobao.Workflow.Activities.Mappings.csproj">
+      <Project>{3dbf35a9-bb3b-4857-9d14-ce353cc92b9b}</Project>
+      <Name>Taobao.Workflow.Activities.Mappings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taobao.Workflow.Activities.Repositories\Taobao.Workflow.Activities.Repositories.csproj">
+      <Project>{379128fb-3de2-4c46-8865-cc61f689764f}</Project>
+      <Name>Taobao.Workflow.Activities.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Taobao.Workflow.Activities\Taobao.Workflow.Activities.csproj">
+      <Project>{a18a335b-f0fd-4fe2-a854-eb6bd2cf17f1}</Project>
+      <Name>Taobao.Workflow.Activities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

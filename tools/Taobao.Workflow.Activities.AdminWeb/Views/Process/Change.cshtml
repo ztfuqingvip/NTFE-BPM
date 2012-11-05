@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "切换版本";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Taobao.Workflow.Activities.Client.ProcessType[] processTypes = ViewBag.ProcessTypes;
+    Taobao.Workflow.Activities.Client.Process process = ViewBag.Process;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    <table border="1">
+        <tr>
+            <td style="width:150px">
+                流程编号：
+            </td>
+            <td>@Html.Label("processId", process.ID.ToString())
+            </td>
+        </tr>
+        <tr>
+            <td>
+                流程标题：
+            </td>
+            <td>@Html.Label("description", process.Title.ToString())
+            </td>
+        </tr>
+        <tr>
+            <td>
+                当前版本：
+            </td>
+            <td>@Html.Label("currentVersion", process.ProcessType.Version)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                切换版本到：
+            </td>
+            <td>@Html.DropDownList("version", processTypes
+                .Select(o => new SelectListItem() { Text = string.Format("版本:{0} 描述:{1}", o.Version, o.Description), Value = o.Version })) 
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="提交" />
+            </td>
+        </tr>
+    </table>
+}

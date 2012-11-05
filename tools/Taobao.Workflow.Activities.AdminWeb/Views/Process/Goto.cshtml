@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "跳转节点";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Taobao.Workflow.Activities.Client.Process process = ViewBag.Process;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    <table border="1">
+        <tr>
+            <td style="width:150px">
+                流程编号：
+            </td>
+            <td>@Html.Label("processId", process.ID.ToString())
+            </td>
+        </tr>
+        <tr>
+            <td>
+                流程标题：
+            </td>
+            <td>@Html.Label("description", process.Title.ToString())
+            </td>
+        </tr>
+        <tr>
+            <td>
+                跳转到：
+            </td>
+            <td>@Html.DropDownList("activityName", process.ProcessType.ActivityNames
+                .Select(o => new SelectListItem() { Text = o, Value = o })) 
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="提交" />
+            </td>
+        </tr>
+    </table>
+}
+

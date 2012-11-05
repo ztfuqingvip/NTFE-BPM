@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A18A335B-F0FD-4FE2-A854-EB6BD2CF17F1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Taobao.Workflow.Activities</RootNamespace>
+    <AssemblyName>Taobao.Workflow.Activities</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CodeSharp.Core">
+      <HintPath>..\..\packages\CodeSharp.Core\lib\net40\CodeSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeSharp.Core.Castles">
+      <HintPath>..\..\packages\CodeSharp.Core.Castles\lib\net40\CodeSharp.Core.Castles.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Agents\ActingRange.cs" />
+    <Compile Include="Agents\Agent.cs" />
+    <Compile Include="Agents\AgentService.cs" />
+    <Compile Include="Agents\IAgentRepository.cs" />
+    <Compile Include="Agents\ProcessActingItem.cs" />
+    <Compile Include="AssertHelper.cs" />
+    <Compile Include="Hosting\ErrorRecord.cs" />
+    <Compile Include="Hosting\IErrorRecordRepository.cs" />
+    <Compile Include="Hosting\SchedulerService.cs" />
+    <Compile Include="Hosting\Resumptions\ActivityInstanceCancelResumption.cs" />
+    <Compile Include="Hosting\Resumptions\HumanEscalationResumption.cs" />
+    <Compile Include="Hosting\Resumptions\SubProcessCompleteResumption.cs" />
+    <Compile Include="Hosting\Events\ActivityInstanceArgs.cs" />
+    <Compile Include="Hosting\Events\ProcessArgs.cs" />
+    <Compile Include="Hosting\Events\WorkItemArgs.cs" />
+    <Compile Include="Hosting\Resumptions\SubProcessCreateResumption.cs" />
+    <Compile Include="Hosting\Resumptions\WorkItemCreateResumption.cs" />
+    <Compile Include="Hosting\Resumptions\ProcessStartResumption.cs" />
+    <Compile Include="Hosting\Resumptions\ErrorResumption.cs" />
+    <Compile Include="Hosting\Resumptions\BookmarkResumption.cs" />
+    <Compile Include="Hosting\IEventBus.cs" />
+    <Compile Include="Hosting\IResumptionRepository.cs" />
+    <Compile Include="Hosting\Scheduler.cs" />
+    <Compile Include="Hosting\WaitingResumption.cs" />
+    <Compile Include="IWorkflowParser.cs" />
+    <Compile Include="Processes\ActivityInstanceBase.cs" />
+    <Compile Include="Processes\ActivityInstances\ServerActivityInstance.cs" />
+    <Compile Include="Processes\ActivityInstances\SubProcessActivityInstance.cs" />
+    <Compile Include="Processes\DataField.cs" />
+    <Compile Include="Processes\Process.cs" />
+    <Compile Include="Processes\ProcessService.cs" />
+    <Compile Include="Processes\ProcessStatus.cs" />
+    <Compile Include="ProcessTypes\ActivitySetting.cs" />
+    <Compile Include="ProcessTypes\Customs\CustomSetting.cs" />
+    <Compile Include="ProcessTypes\Humans\DefaultHumanFinishRuleAsserter.cs" />
+    <Compile Include="ProcessTypes\IProcessTypeRepository.cs" />
+    <Compile Include="ProcessTypes\Humans\HumanActionerRule.cs" />
+    <Compile Include="ProcessTypes\Humans\HumanEscalationRule.cs" />
+    <Compile Include="ProcessTypes\Customs\FinishRule.cs" />
+    <Compile Include="ProcessTypes\Humans\HumanSetting.cs" />
+    <Compile Include="ProcessTypes\Parallels\ParallelSetting.cs" />
+    <Compile Include="ProcessTypes\ProcessTypeService.cs" />
+    <Compile Include="ProcessTypes\Customs\StartRule.cs" />
+    <Compile Include="IScriptParser.cs" />
+    <Compile Include="ProcessTypes\Servers\ServerSetting.cs" />
+    <Compile Include="ProcessTypes\SubProcesses\SubProcessSetting.cs" />
+    <Compile Include="Statements\CustomExtension.cs" />
+    <Compile Include="Statements\DataFieldExtension.cs" />
+    <Compile Include="Statements\Human.cs" />
+    <Compile Include="Processes\ActivityInstances\HumanActivityInstance.cs" />
+    <Compile Include="Statements\CustomParallel.cs" />
+    <Compile Include="Statements\ParallelExtension.cs" />
+    <Compile Include="Statements\Server.cs" />
+    <Compile Include="Statements\ServerExtension.cs" />
+    <Compile Include="Statements\SubProcess.cs" />
+    <Compile Include="Statements\SubProcessExtension.cs" />
+    <Compile Include="Statements\WorkflowActivity.cs" />
+    <Compile Include="TestHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Text.cs" />
+    <Compile Include="TimeZones\ITimeZoneRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeZones\TimeZone.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeZones\TimeZoneService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TimeZones\WorkingDay.cs" />
+    <Compile Include="TimeZones\WorkingHour.cs" />
+    <Compile Include="TimeZones\WorkingType.cs" />
+    <Compile Include="Users\IUserRepository.cs" />
+    <Compile Include="Users\UserService.cs" />
+    <Compile Include="Users\User.cs" />
+    <Compile Include="WorkItems\WorkItemService.cs" />
+    <Compile Include="Processes\IProcessRepository.cs" />
+    <Compile Include="ProcessTypes\ProcessType.cs" />
+    <Compile Include="Hosting\WorkflowInstanceStore.cs" />
+    <Compile Include="Statements\HumanExtension.cs" />
+    <Compile Include="WorkflowBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statements\GetUsers.cs" />
+    <Compile Include="Statements\Custom.cs" />
+    <Compile Include="WorkItems\IWorkItemRepository.cs" />
+    <Compile Include="WorkItems\WorkItem.cs" />
+    <Compile Include="WorkItems\WorkItemStatus.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Hosting\Errors\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\NTFE-Core\src\Taobao.Activities\Taobao.Activities.csproj">
+      <Project>{4e02a977-89ae-4792-bc25-91b36ed56866}</Project>
+      <Name>Taobao.Activities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

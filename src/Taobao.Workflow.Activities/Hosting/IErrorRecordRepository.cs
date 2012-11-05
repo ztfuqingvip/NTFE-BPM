@@ -1,0 +1,46 @@
+﻿/*
+    Copyright (C) 2012  Alibaba
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using CodeSharp.Core.RepositoryFramework;
+
+namespace Taobao.Workflow.Activities.Hosting
+{
+    /// <summary>
+    /// 调度异常记录仓储
+    /// </summary>
+    public interface IErrorRecordRepository : IRepository<long, ErrorRecord>
+    {
+        /// <summary>
+        /// 取消指定流程的所有错误记录
+        /// </summary>
+        /// <param name="process"></param>
+        void CancelAll(Process process);
+        /// <summary>
+        /// 取消指定流程的节点的所有错误记录
+        /// </summary>
+        /// <param name="process"></param>
+        /// <param name="activityName"></param>
+        void CancelAll(Process process, string activityName);
+
+        IEnumerable<ErrorRecord> FindAllValid();
+        IEnumerable<ErrorRecord> FindAllValid(Process process);
+    }
+}
