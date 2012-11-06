@@ -22,29 +22,28 @@ using System.Web;
 using Castle.Services.Transaction;
 using Taobao.Workflow.Activities;
 using Taobao.Workflow.Activities.Hosting;
-using Taobao.Workflow.Client.Integrated;
 
-namespace Taobao.Workflow.Host
+namespace Host
 {
     /// <summary>
-    /// 用于实现子流程与外围的集成
+    /// 用于实现子流程与外围的集成，这是一个范例实现，可按需扩充
     /// </summary>
     [CodeSharp.Core.Component]
     [Transactional]
     public class SubProcessHelper : SubProcessCreateWaitingResumption.DefaultSubProcessHelper, SubProcessCreateWaitingResumption.ISubProcessHelper
     {
-        private IEngineIntegrationService _integrationService;
+        //private IEngineIntegrationService _integrationService;
         public SubProcessHelper(IProcessService processService
             , IProcessTypeService processTypeService
             , IUserService userService
-            , string ntfeSystemUserName
-            , IEngineIntegrationService integrationService)
+            , string systemUserName)
+            //, IEngineIntegrationService integrationService)
             : base(processService
             , processTypeService
             , userService
-            , ntfeSystemUserName)
+            , systemUserName)
         {
-            this._integrationService = integrationService;
+            //this._integrationService = integrationService;
         }
 
         [Transaction(TransactionMode.Requires)]
@@ -53,13 +52,13 @@ namespace Taobao.Workflow.Host
             var subProcess = base.Create(parent, subProcessTypeName, assignedSubProcessId);
             //HACK:若与外围集成异常会出现Unexpected row count: 0; expected: 1 问题，应注意避免
             //同时在流程服务中创建一条流程数据记录
-            this._integrationService.JustCreateSubFlowData("ntfe"
-                , subProcess.ID
-                , subProcess.Originator.UserName
-                , subProcess.ProcessType.Name
-                , subProcess.Title
-                , new Client.FlowDataFields(subProcess.GetDataFields())
-                , parent.ID);
+            //this._integrationService.JustCreateSubFlowData("ntfe"
+            //    , subProcess.ID
+            //    , subProcess.Originator.UserName
+            //    , subProcess.ProcessType.Name
+            //    , subProcess.Title
+            //    , new Client.FlowDataFields(subProcess.GetDataFields())
+            //    , parent.ID);
             return subProcess;
         }
     }

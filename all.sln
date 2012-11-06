@@ -44,7 +44,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{D759E7E2-2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Activities.AdminWeb", "tools\Taobao.Workflow.Activities.AdminWeb\Taobao.Workflow.Activities.AdminWeb.csproj", "{7A33956E-5364-4668-902B-998664848417}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taobao.Workflow.Host", "src\Taobao.Workflow.Host\Taobao.Workflow.Host.csproj", "{721E87A9-2331-4FC1-8AB8-8F495EC84141}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "samples\Host\Host.csproj", "{721E87A9-2331-4FC1-8AB8-8F495EC84141}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host.Test", "samples\Host.Test\Host.Test.csproj", "{8818A0D7-0C45-44F5-97BE-F4CA785E2B02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +106,10 @@ Global
 		{721E87A9-2331-4FC1-8AB8-8F495EC84141}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{721E87A9-2331-4FC1-8AB8-8F495EC84141}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{721E87A9-2331-4FC1-8AB8-8F495EC84141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8818A0D7-0C45-44F5-97BE-F4CA785E2B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8818A0D7-0C45-44F5-97BE-F4CA785E2B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8818A0D7-0C45-44F5-97BE-F4CA785E2B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8818A0D7-0C45-44F5-97BE-F4CA785E2B02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,5 +128,6 @@ Global
 		{39D20162-DF3B-47A0-87AC-A166C7F4E458} = {517D4902-FBF7-40CB-8E38-51D2B4531CBD}
 		{7A33956E-5364-4668-902B-998664848417} = {D759E7E2-21AF-41D0-9CF3-B17F25036B28}
 		{721E87A9-2331-4FC1-8AB8-8F495EC84141} = {D759E7E2-21AF-41D0-9CF3-B17F25036B28}
+		{8818A0D7-0C45-44F5-97BE-F4CA785E2B02} = {D759E7E2-21AF-41D0-9CF3-B17F25036B28}
 	EndGlobalSection
 EndGlobal

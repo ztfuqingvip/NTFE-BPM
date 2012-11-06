@@ -130,8 +130,8 @@
     <exec program="${msbuild}"
           commandline="${msbuild.params} 
           ${msbuild.params.output}\node_ntfe_service\bin"
-          workingdir="${dir}\src\Taobao.Workflow.Host" />
-    <copy file="${build.absolutepath}\node_ntfe_service\bin\Taobao.Workflow.Host.dll.config" 
+          workingdir="${dir}\samples\Host" />
+    <copy file="${build.absolutepath}\node_ntfe_service\bin\Host.dll.config" 
           tofile="${build.absolutepath}\node_ntfe_service\app.config" />
     <delete>
       <fileset>
@@ -153,10 +153,14 @@
     <!--set entrance-->
     <xmlpoke file="${build.absolutepath}\node_ntfe_service\app.config"
              xpath="${xpath.entrance}"
-             value="Taobao.Workflow.Host.ServiceEntrance,Taobao.Workflow.Host" />
+             value="Host.ServiceEntrance,Host" />
     <xmlpoke file="${build.absolutepath}\node_ntfe_scheduler\app.config"
              xpath="${xpath.entrance}"
-             value="Taobao.Workflow.Host.SchedulerEntrance,Taobao.Workflow.Host" />
+             value="Host.SchedulerEntrance,Host" />
+    <!--apploader-->
+    <xmlpoke file=".\tools\apploader\Apploader.Console.exe.config"
+             xpath="/configuration/appSettings/add[@key='serviceRoot']/@value"
+             value="${build.absolutepath}" />
   </target>
   
   <target name="test_bpm">

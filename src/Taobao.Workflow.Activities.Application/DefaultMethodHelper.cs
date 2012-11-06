@@ -27,6 +27,8 @@ using CodeSharp.Core.Utils;
 
 namespace Taobao.Workflow.Activities.Application
 {
+    //FIXME:此类可在Host内实现即可
+
     /// <summary>
     /// 默认的用户库访问 基于NSF
     /// </summary>

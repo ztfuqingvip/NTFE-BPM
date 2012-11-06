@@ -23,56 +23,56 @@ using Taobao.Workflow.Activities.Hosting;
 using CodeSharp.Core.Services;
 using Taobao.Workflow.Activities;
 using Castle.Services.Transaction;
-using Taobao.Workflow.Client.Integrated;
 
-namespace Taobao.Workflow.Host
+namespace Host
 {
     /// <summary>
-    /// 用于实现超时升级规则与外围的集成部分
+    /// 用于实现超时升级规则与外围的集成部分，这是一个范例实现，可按需扩充
     /// </summary>
     [CodeSharp.Core.Component]
     [Transactional]
     public class HumanEscalationHelper : HumanEscalationWaitingResumption.DefaultHumanEscalationHelper, HumanEscalationWaitingResumption.IHumanEscalationHelper
     {
-        private IEngineIntegrationService _integrationService;
+        //private IEngineIntegrationService _integrationService;
         public HumanEscalationHelper(ILoggerFactory factory
             , IWorkItemService workItemService
             , IUserService userService
             , ISchedulerService schedulerService
-            , ProcessService processService
-            , IEngineIntegrationService integrationService)
+            , ProcessService processService)
+            //, IEngineIntegrationService integrationService)
             : base(factory
             , workItemService
             , userService
             , schedulerService
             , processService)
         {
-            this._integrationService = integrationService;
+            //this._integrationService = integrationService;
         }
 
         public override void Notify(Process process, IEnumerable<WorkItem> workItems, string templateName)
         {
-            foreach (var w in workItems)
-                using (new CodeSharp.ServiceFramework.Async.ServiceAsync())
-                    this._integrationService.NotifyHumanEscalation(templateName
-                        , process.ID
-                        , w.ID.ToString()
-                        , w.Actioner.UserName);
+            //超时通知
+            //foreach (var w in workItems)
+            //    using (new CodeSharp.ServiceFramework.Async.ServiceAsync())
+            //        this._integrationService.NotifyHumanEscalation(templateName
+            //            , process.ID
+            //            , w.ID.ToString()
+            //            , w.Actioner.UserName);
         }
         [Transaction(TransactionMode.Requires)]
         public override void Redirect(Process process, string activityName, IEnumerable<WorkItem> workItems, string toUserName)
         {
             base.Redirect(process, activityName, workItems, toUserName);
             if (workItems.Count() == 0) return;
-            //在流程服务层增加注释
-            this._integrationService.CreateCommentForHumanEscalationRedirect(process.ID, activityName);
+            //在流程服务层增加备注
+            //this._integrationService.CreateCommentForHumanEscalationRedirect(process.ID, activityName);
         }
         [Transaction(TransactionMode.Requires)]
         public override void Goto(Process process, string from, string to)
         {
             base.Goto(process, from, to);
-            //在流程服务层增加注释
-            this._integrationService.CreateCommentForHumanEscalationGoto(process.ID, from, to);
+            //在流程服务层增加备注
+            //this._integrationService.CreateCommentForHumanEscalationGoto(process.ID, from, to);
         }
     }
 }

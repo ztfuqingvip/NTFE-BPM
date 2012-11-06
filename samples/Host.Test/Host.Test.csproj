@@ -34,48 +34,30 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Taobao.Package.Castle.2.1\lib\net35\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.DynamicProxy2">
-      <HintPath>..\..\packages\Taobao.Package.Castle.2.1\lib\net35\Castle.DynamicProxy2.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.MicroKernel">
-      <HintPath>..\..\packages\Taobao.Package.Castle.2.1\lib\net35\Castle.MicroKernel.dll</HintPath>
+      <HintPath>..\..\packages\Castle.Core\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor">
-      <HintPath>..\..\packages\Taobao.Package.Castle.2.1\lib\net35\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\packages\Castle.Windsor\lib\net40\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeSharp.Core">
+      <HintPath>..\..\packages\CodeSharp.Core\lib\net40\CodeSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeSharp.Core.Castles">
+      <HintPath>..\..\packages\CodeSharp.Core.Castles\lib\net40\CodeSharp.Core.Castles.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\..\packages\Taobao.Package.Log4net.1.2\lib\net35\log4net.dll</HintPath>
+      <HintPath>..\..\packages\log4net\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="Taobao.Application">
-      <HintPath>..\..\packages\Taobao.Model.1.0\lib\net35\Taobao.Application.dll</HintPath>
-    </Reference>
-    <Reference Include="Taobao.Infrastructure">
-      <HintPath>..\..\packages\Taobao.AppInfrastructure.1.0\lib\net40\Taobao.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Taobao.Infrastructure.Castles">
-      <HintPath>..\..\packages\Taobao.Infrastructure.Castles.1.0\lib\net40\Taobao.Infrastructure.Castles.dll</HintPath>
-    </Reference>
-    <Reference Include="Taobao.Model">
-      <HintPath>..\..\packages\Taobao.Model.1.0\lib\net35\Taobao.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="Taobao.ServiceFramework">
-      <HintPath>..\..\packages\Taobao.ServiceFramework.1.2\lib\net35\Taobao.ServiceFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Taobao.ServiceFramework.Castles">
-      <HintPath>..\..\packages\Taobao.ServiceFramework.Castles.1.2\lib\net35\Taobao.ServiceFramework.Castles.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -106,13 +88,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Taobao.Workflow.Activities.Client\Taobao.Workflow.Activities.Client.csproj">
+    <ProjectReference Include="..\..\src\Taobao.Workflow.Activities.Client\Taobao.Workflow.Activities.Client.csproj">
       <Project>{3102C63F-1AFE-4B91-8027-B5E2DEBDE872}</Project>
       <Name>Taobao.Workflow.Activities.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Taobao.Workflow.Activities.Management\Taobao.Workflow.Activities.Management.csproj">
+    <ProjectReference Include="..\..\src\Taobao.Workflow.Activities.Management\Taobao.Workflow.Activities.Management.csproj">
       <Project>{93E7E305-FFD0-489F-BEC5-B6E96BB87A71}</Project>
       <Name>Taobao.Workflow.Activities.Management</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Host\Host.csproj">
+      <Project>{721e87a9-2331-4fc1-8ab8-8f495ec84141}</Project>
+      <Name>Host %28host\Host%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,8 @@ obj
 *.testsettings
 *.vsmdi
 TestResult.xml
+KeekAlive
+log
 
 #mono 
 test-results

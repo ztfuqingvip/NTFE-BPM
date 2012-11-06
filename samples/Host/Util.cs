@@ -25,7 +25,7 @@ using System.IO;
 using CodeSharp.Core.Castles;
 //using CodeSharp.Core.ZooKeepers;
 
-namespace Taobao.Workflow.Host
+namespace Host
 {
     public static class Util
     {

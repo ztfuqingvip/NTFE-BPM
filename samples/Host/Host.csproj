@@ -7,8 +7,8 @@
     <ProjectGuid>{721E87A9-2331-4FC1-8AB8-8F495EC84141}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Taobao.Workflow.Host</RootNamespace>
-    <AssemblyName>Taobao.Workflow.Host</AssemblyName>
+    <RootNamespace>Host</RootNamespace>
+    <AssemblyName>Host</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -74,9 +74,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Taobao.Workflow.Client">
-      <HintPath>..\..\lib\Taobao.Workflow.Client.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventBus.cs" />
@@ -90,49 +87,60 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="TFlowEngineSchedulerNode\facilities.config" />
+    <EmbeddedResource Include="TFlowEngineSchedulerNode\log4net.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TFlowEngineSchedulerNode\properties.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TFlowEngineServiceNode\facilities.config" />
+    <EmbeddedResource Include="TFlowEngineServiceNode\log4net.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TFlowEngineServiceNode\properties.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\NTFE-Core\src\Taobao.Activities.Test\Taobao.Activities.Test.csproj">
-      <Project>{42301779-9772-485e-b597-5f46ac36a089}</Project>
-      <Name>Taobao.Activities.Test</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\NTFE-Core\src\Taobao.Activities\Taobao.Activities.csproj">
       <Project>{4e02a977-89ae-4792-bc25-91b36ed56866}</Project>
       <Name>Taobao.Activities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Taobao.Workflow.Activities.Application\Taobao.Workflow.Activities.Application.csproj">
+    <ProjectReference Include="..\..\src\Taobao.Workflow.Activities.Application\Taobao.Workflow.Activities.Application.csproj">
       <Project>{99801043-80a6-4818-96d3-5989500c3f3f}</Project>
       <Name>Taobao.Workflow.Activities.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Taobao.Workflow.Activities.Client\Taobao.Workflow.Activities.Client.csproj">
+    <ProjectReference Include="..\..\src\Taobao.Workflow.Activities.Client\Taobao.Workflow.Activities.Client.csproj">
       <Project>{3102c63f-1afe-4b91-8027-b5e2debde872}</Project>
       <Name>Taobao.Workflow.Activities.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Taobao.Workflow.Activities.Converters\Taobao.Workflow.Activities.Converters.csproj">
+    <ProjectReference Include="..\..\src\Taobao.Workflow.Activities.Converters\Taobao.Workflow.Activities.Converters.csproj">
       <Project>{e3606d8f-f315-4e4c-9c15-205fb82bc948}</Project>
       <Name>Taobao.Workflow.Activities.Converters</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Taobao.Workflow.Activities.Designer.Statements\Taobao.Workflow.Activities.Designer.Statements.csproj">
+    <ProjectReference Include="..\..\src\Taobao.Workflow.Activities.Designer.Statements\Taobao.Workflow.Activities.Designer.Statements.csproj">
       <Project>{39d20162-df3b-47a0-87ac-a166c7f4e458}</Project>
       <Name>Taobao.Workflow.Activities.Designer.Statements</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Taobao.Workflow.Activities.Management\Taobao.Workflow.Activities.Management.csproj">
+    <ProjectReference Include="..\..\src\Taobao.Workflow.Activities.Management\Taobao.Workflow.Activities.Management.csproj">
       <Project>{93e7e305-ffd0-489f-bec5-b6e96bb87a71}</Project>
       <Name>Taobao.Workflow.Activities.Management</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Taobao.Workflow.Activities.Mappings\Taobao.Workflow.Activities.Mappings.csproj">
+    <ProjectReference Include="..\..\src\Taobao.Workflow.Activities.Mappings\Taobao.Workflow.Activities.Mappings.csproj">
       <Project>{3dbf35a9-bb3b-4857-9d14-ce353cc92b9b}</Project>
       <Name>Taobao.Workflow.Activities.Mappings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Taobao.Workflow.Activities.Repositories\Taobao.Workflow.Activities.Repositories.csproj">
+    <ProjectReference Include="..\..\src\Taobao.Workflow.Activities.Repositories\Taobao.Workflow.Activities.Repositories.csproj">
       <Project>{379128fb-3de2-4c46-8865-cc61f689764f}</Project>
       <Name>Taobao.Workflow.Activities.Repositories</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Taobao.Workflow.Activities\Taobao.Workflow.Activities.csproj">
+    <ProjectReference Include="..\..\src\Taobao.Workflow.Activities\Taobao.Workflow.Activities.csproj">
       <Project>{a18a335b-f0fd-4fe2-a854-eb6bd2cf17f1}</Project>
       <Name>Taobao.Workflow.Activities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

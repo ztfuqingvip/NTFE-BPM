@@ -28,53 +28,54 @@ using CodeSharp.Core.Services;
 using Taobao.Workflow.Activities;
 
 using Castle.MicroKernel.Registration;
-using Taobao.Activities;
-using Taobao.Workflow.Activities.Application;
 
-namespace Taobao.Workflow.Host
+namespace Host
 {
     /// <summary>
-    /// NTFE调度器服务声明
-    /// 专用于独立调度器宿主
+    /// NTFE服务声明
+    /// <remarks>仅用于提供NTFE-BPM的客户端服务</remarks>
     /// </summary>
-    public class SchedulerEntrance : Taobao.Infrastructure.Toolkit.AppDomains.Entrance
+    public class ServiceEntrance : Taobao.Infrastructure.Toolkit.AppDomains.Entrance
     {
         public override void Main()
         {
             //框架配置初始化
-            SystemConfig.ConfigFilesAssemblyName = "Taobao.ConfigFiles";
-            SystemConfig.Configure("TFlowEngineSchedulerNode")
+            SystemConfig.ConfigFilesAssemblyName = "Host";
+            SystemConfig.Configure("TFlowEngineServiceNode")
                 .Castle()
-                .ReadCommonProperties()
+                //不再使用内部配置服务
+                //.ReadCommonProperties()
                 .BusinessDependency(Util.TFlowEngineReference().ToArray())
                 .Resolve(this.Prepare)
                 .Globalization();
-                //.DefaultAppAgent("NTFE-调度节点 专用于独立调度器宿主")
-                //UNDONE:启用NSF
-                //.AsNsfClient();
-            //设置核心使用的容器
-            ActivityUtilities.Container(new Container());
-            Taobao.Activities.Hosting.WorkflowInstance.IsEnableDebug = true;
-            //启动调度
-            DependencyResolver.Resolve<Taobao.Workflow.Activities.Hosting.IScheduler>().Run();
+                //.DefaultAppAgent("NTFE-服务节点，提供公开的api调用")
+                //.AsNsfClient(NetHelper.GetIPv4Address()
+                //, int.Parse(SystemConfig.Settings["ntfeTcpPort"])
+                //, AllServiceTypesToRegist().ToArray());
+            //基本可用性检查
+            this.DoTest();
         }
         public override void Unload()
         {
-            //停止调度
-            DependencyResolver.Resolve<Taobao.Workflow.Activities.Hosting.IScheduler>().Stop();
             SystemConfig.Cleanup();
         }
         private void Prepare(WindsorResolver r)
         {
             var windsor = r.Container;
             Util.Resolve(r);
-            //注册调度器
-            windsor.Register(Component
-                .For<Taobao.Workflow.Activities.Hosting.IScheduler>()
-                .Instance(new Taobao.Workflow.Activities.Hosting.Scheduler(windsor.Resolve<ILoggerFactory>()
-                    , System.Configuration.ConfigurationManager.AppSettings["SchedulerId"]
-                    , SystemConfig.Settings["ntfeSchedulerInterval"]
-                    , SystemConfig.Settings["ntfeSchedulerPerChargeCount"])));
+        }
+        //要注册的服务
+        private IEnumerable<Type> AllServiceTypesToRegist()
+        {
+            yield return typeof(Taobao.Workflow.Activities.Client.ITFlowEngine);
+            yield return typeof(Taobao.Workflow.Activities.Management.ITFlowEngine);
+            //设计器/流程转换器服务
+            yield return typeof(Taobao.Workflow.Activities.Converters.IConverterService);
+        }
+        private void DoTest()
+        {
+            this.AllServiceTypesToRegist().ToList().ForEach(o => DependencyResolver.Resolve(o));
+            AppDomain.CurrentDomain.UnhandledException += (s, e) => { };
         }
     }
 }

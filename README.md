@@ -69,6 +69,13 @@ https://github.com/codesharp/infrastructure/blob/master/upgrade.md
 [More](upgrade.md)
 
 
+## Host
+
+The project(samples\host) is an example, and want to show you how to run basic applications of BPM.
+
+You can extend it for more features, like notify, event, and so on.
+
+
 ## NTFE-BPM License
 
 ![GPL](http://www.gnu.org/graphics/gplv3-127x51.png)

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Taobao.Workflow.Host.Test {
+namespace Host.Test {
     using System;
     
     
