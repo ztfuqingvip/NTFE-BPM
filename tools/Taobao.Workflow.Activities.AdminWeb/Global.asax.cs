@@ -18,14 +18,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using CodeSharp.Core.Castles;
+using CodeSharp.Core.Web;
 using CodeSharp.Framework;
 using CodeSharp.Framework.Castles;
-using CodeSharp.Core.Web;
-using CodeSharp.Core.Castles;
-using System.Reflection;
+using CodeSharp.ServiceFramework.Castles;
 
 namespace Taobao.Workflow.Activities.AdminWeb
 {
@@ -54,16 +55,27 @@ namespace Taobao.Workflow.Activities.AdminWeb
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
+            Castle.Windsor.IWindsorContainer c = null;
+
+            //配置框架初始化
+            SystemConfig.ConfigFilesAssemblyName = "Taobao.Workflow.Activities.AdminWeb";
             SystemConfig.Configure("TFlowEngineAdminWeb")
-                .ReadCommonProperties()
                 .Castle()
                 .Resolve(o =>
                 {
+                    c = o.Container;
                     o.Container.ControllerFactory();
                     o.Container.RegisterControllers(Assembly.GetExecutingAssembly());
                 });
-                //UNDONE:NSFclient
-                //.AsNsfClient();
+
+           //NSF初始化
+            CodeSharp.ServiceFramework.Configuration
+                .Configure()
+                .Castle(c)
+                .Log4Net(false)
+                .Associate(new Uri("tcp://localhost:8000/remote.rem"))
+                .Endpoint()
+                .Run();
         }
     }
 }

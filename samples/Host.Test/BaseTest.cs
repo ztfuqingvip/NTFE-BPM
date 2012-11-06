@@ -56,8 +56,9 @@ namespace Host.Test
             this._managementApi = c.Resolve<Taobao.Workflow.Activities.Management.ITFlowEngine>();
 
             //NTFE使用ID作为账号库用户名
-            //this._originator = this.GetMappedUserId(this._originator).ToString();
-            //this._superior = this.GetMappedUserId(this._superior).ToString();
+            //UDONE:由于人员服务未做mock，因此目前取固定值
+            this._originator = "5FE9A969-7CB2-4BA7-9601-E11473E8B233";//this.GetMappedUserId(this._originator).ToString();
+            this._superior = "9D23EAA9-6145-4635-A7C2-D8AEEDF45C1E";//this.GetMappedUserId(this._superior).ToString();
         }
         [TestFixtureTearDown]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanup]

@@ -25,6 +25,7 @@ using CodeSharp.Framework;
 using CodeSharp.Framework.Castles;
 using CodeSharp.Core.Castles;
 using CodeSharp.Core.Services;
+using CodeSharp.ServiceFramework.Castles;
 using Taobao.Workflow.Activities;
 
 using Castle.MicroKernel.Registration;
@@ -39,19 +40,27 @@ namespace Host
     {
         public override void Main()
         {
+            Castle.Windsor.IWindsorContainer c = null;
+
             //框架配置初始化
             SystemConfig.ConfigFilesAssemblyName = "Host";
             SystemConfig.Configure("TFlowEngineServiceNode")
                 .Castle()
-                //不再使用内部配置服务
-                //.ReadCommonProperties()
                 .BusinessDependency(Util.TFlowEngineReference().ToArray())
-                .Resolve(this.Prepare)
+                .Resolve(o => { c = o.Container; this.Prepare(o); })
                 .Globalization();
-                //.DefaultAppAgent("NTFE-服务节点，提供公开的api调用")
-                //.AsNsfClient(NetHelper.GetIPv4Address()
-                //, int.Parse(SystemConfig.Settings["ntfeTcpPort"])
-                //, AllServiceTypesToRegist().ToArray());
+
+            //通过NSF暴露该节点的引擎服务
+            CodeSharp.ServiceFramework.Configuration
+                .Configure()
+                .Castle(c)
+                .Log4Net(false)
+                //.Associate(new Uri(""))//若有中心节点则注册
+                .Remoting(new Uri("tcp://localhost:8000/remote.rem"))
+                .Endpoint()
+                .Add(this.AllServiceTypesToRegist().ToArray())
+                .Run();
+
             //基本可用性检查
             this.DoTest();
         }
@@ -64,7 +73,7 @@ namespace Host
             var windsor = r.Container;
             Util.Resolve(r);
         }
-        //要注册的服务
+        //要暴露的服务
         private IEnumerable<Type> AllServiceTypesToRegist()
         {
             yield return typeof(Taobao.Workflow.Activities.Client.ITFlowEngine);

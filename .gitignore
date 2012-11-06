@@ -18,6 +18,7 @@ obj
 TestResult.xml
 KeekAlive
 log
+logs
 
 #mono 
 test-results

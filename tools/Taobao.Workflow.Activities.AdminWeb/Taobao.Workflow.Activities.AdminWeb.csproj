@@ -149,6 +149,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\Downloads\Silverlight_mac.dmg" />
+    <EmbeddedResource Include="TFlowEngineAdminWeb\facilities.config" />
+    <EmbeddedResource Include="TFlowEngineAdminWeb\log4net.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TFlowEngineAdminWeb\properties.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

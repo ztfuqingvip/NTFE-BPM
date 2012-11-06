@@ -45,17 +45,14 @@ namespace Host
             SystemConfig.ConfigFilesAssemblyName = "Host";
             SystemConfig.Configure("TFlowEngineSchedulerNode")
                 .Castle()
-                //不再使用内部配置服务
-                //.ReadCommonProperties()
                 .BusinessDependency(Util.TFlowEngineReference().ToArray())
                 .Resolve(this.Prepare)
                 .Globalization();
-                //.DefaultAppAgent("NTFE-调度节点 专用于独立调度器宿主")
-                //UNDONE:启用NSF
-                //.AsNsfClient();
+
             //设置核心使用的容器
             ActivityUtilities.Container(new Container());
             Taobao.Activities.Hosting.WorkflowInstance.IsEnableDebug = true;
+            
             //启动调度
             DependencyResolver.Resolve<Taobao.Workflow.Activities.Hosting.IScheduler>().Run();
         }

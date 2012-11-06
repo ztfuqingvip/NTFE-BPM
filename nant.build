@@ -94,7 +94,7 @@
       </fileset>
     </delete>
     <copy todir="${build.absolutepath}\adminWeb_ntfe\Content\Silverlight">
-      <fileset basedir="${dir}\packages\Taobao.Designer.1.0\lib\sl40">
+      <fileset basedir="${dir}\lib">
         <include name="Taobao.Designer.xap" />
       </fileset>
     </copy>
