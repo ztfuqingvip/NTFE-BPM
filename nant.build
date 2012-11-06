@@ -162,7 +162,14 @@
              xpath="/configuration/appSettings/add[@key='serviceRoot']/@value"
              value="${build.absolutepath}" />
   </target>
-  
+
+  <target name="sample_service">
+    <exec program="${msbuild}"
+          commandline="${msbuild.params} 
+          ${msbuild.params.weboutput.mvc}\web_sample_service
+          ${msbuild.params.output}\web_sample_service\bin"
+           workingdir="${dir}\samples\MoreService" />
+  </target>
   <target name="test_bpm">
     <exec program="${msbuild}"
           commandline="${msbuild.params} ${msbuild.params.output}\ntfe_bpm_test"
